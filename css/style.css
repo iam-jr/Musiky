@@ -1,0 +1,356 @@
+:root {
+	--bg-a: #072235;
+	--bg-b: #0a3f56;
+	--bg-c: #126b74;
+	--card: rgba(255, 255, 255, 0.13);
+	--card-soft: rgba(255, 255, 255, 0.2);
+	--line: rgba(255, 255, 255, 0.24);
+	--text-main: #f2fbff;
+	--text-soft: #cde8f7;
+	--orange: #ffb84d;
+	--mint: #2fe3b0;
+	--blue: #22a4f8;
+	--red: #ff6f5c;
+	--shadow: 0 16px 40px rgba(0, 0, 0, 0.33);
+}
+
+* {
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	font-family: "Verdana", "Trebuchet MS", sans-serif;
+	color: var(--text-main);
+	background:
+		radial-gradient(circle at 8% 12%, rgba(255, 184, 77, 0.24), transparent 34%),
+		radial-gradient(circle at 92% 10%, rgba(47, 227, 176, 0.23), transparent 30%),
+		linear-gradient(165deg, var(--bg-a), var(--bg-b) 52%, var(--bg-c));
+	padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+}
+
+body.modal-open {
+	overflow: hidden;
+}
+
+.app-shell {
+	width: min(430px, 100vw - 8px);
+	height: calc(100dvh - 16px);
+	margin: 0 auto;
+	background: linear-gradient(165deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.08));
+	border: 1px solid var(--line);
+	border-radius: 24px;
+	box-shadow: var(--shadow);
+	padding: 8px;
+	display: grid;
+	grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+	gap: 8px;
+	overflow: hidden;
+}
+
+.brand-bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: var(--card);
+	border: 1px solid var(--line);
+	border-radius: 16px;
+	padding: 8px 10px;
+}
+
+.brand-left {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.logo-chip {
+	width: 44px;
+	height: 44px;
+	padding: 3px;
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.18);
+	border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.logo-chip svg {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.brand-left h2 {
+	margin: 0;
+	font-size: 1.24rem;
+	letter-spacing: 0.7px;
+}
+
+.brand-left p {
+	margin: 2px 0 0;
+	font-size: 0.72rem;
+	color: var(--text-soft);
+}
+
+.time-left {
+	font-size: 1rem;
+	padding: 6px 10px;
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.19);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hud-row {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 8px;
+}
+
+.hud-box {
+	text-align: center;
+	background: var(--card);
+	border: 1px solid var(--line);
+	border-radius: 14px;
+	padding: 7px 6px;
+}
+
+.hud-box span {
+	display: block;
+	font-size: 0.67rem;
+	color: var(--text-soft);
+}
+
+.hud-box strong {
+	font-size: 1.25rem;
+}
+
+.stage-wrap {
+	position: relative;
+	min-height: 0;
+	border-radius: 20px;
+	overflow: hidden;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+canvas {
+	width: 100%;
+	height: 100%;
+	display: block;
+	background: linear-gradient(180deg, #092036, #11395a 55%, #174c68);
+	touch-action: none;
+}
+
+.control-row {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 8px;
+}
+
+.lane-btn {
+	height: 56px;
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	border-radius: 14px;
+	color: #fff;
+	font-size: 1.2rem;
+	font-weight: 800;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.lane-0 { background: linear-gradient(140deg, #21c6ff, #1774ea); }
+.lane-1 { background: linear-gradient(140deg, #3ce4bd, #12977d); }
+.lane-2 { background: linear-gradient(140deg, #ffd57a, #ff9745); }
+.lane-3 { background: linear-gradient(140deg, #ff9b7a, #ff5d5d); }
+
+.lane-btn:active,
+.lane-btn.active,
+.play-btn:active,
+.boost-btn:active {
+	transform: scale(0.97);
+	filter: brightness(1.06);
+}
+
+.status-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+}
+
+.meter-block {
+	padding: 8px;
+	border-radius: 12px;
+	background: var(--card);
+	border: 1px solid var(--line);
+}
+
+.meter-block span {
+	font-size: 0.68rem;
+	color: var(--text-soft);
+}
+
+.meter-track {
+	height: 9px;
+	margin-top: 5px;
+	border-radius: 999px;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.22);
+}
+
+.meter-fill {
+	height: 100%;
+	width: 100%;
+	transition: width 140ms linear;
+}
+
+.meter-fill.energy {
+	background: linear-gradient(90deg, var(--mint), #efff9a);
+}
+
+.meter-fill.heat {
+	width: 0;
+	background: linear-gradient(90deg, var(--blue), var(--red));
+}
+
+.boost-btn {
+	grid-column: 1 / -1;
+	height: 44px;
+	border: 1px solid rgba(255, 255, 255, 0.32);
+	border-radius: 12px;
+	font-size: 1rem;
+	font-weight: 800;
+	color: #fff;
+	background: linear-gradient(140deg, rgba(34, 164, 248, 0.9), rgba(255, 111, 92, 0.92));
+}
+
+.overlay {
+	position: absolute;
+	inset: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	padding: 12px;
+	background: rgba(3, 16, 27, 0.65);
+}
+
+.overlay.show {
+	display: flex;
+}
+
+.result-card {
+	width: min(320px, 96%);
+	padding: 16px;
+	border-radius: 16px;
+	background: linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.82));
+	border: 1px solid rgba(255, 255, 255, 0.7);
+	color: #17344b;
+	text-align: center;
+}
+
+.result-card h3 {
+	margin: 0;
+	font-size: 1.2rem;
+}
+
+.result-card p {
+	margin: 8px 0 12px;
+	font-size: 0.9rem;
+	line-height: 1.34;
+}
+
+.intro-modal {
+	position: fixed;
+	inset: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	padding: 14px;
+	background: rgba(4, 16, 27, 0.55);
+	backdrop-filter: blur(6px);
+	z-index: 30;
+}
+
+.intro-modal.open {
+	display: flex;
+}
+
+.intro-card {
+	width: min(420px, 100%);
+	padding: 16px;
+	border-radius: 22px;
+	background: linear-gradient(170deg, rgba(255, 255, 255, 0.98), rgba(246, 252, 255, 0.94));
+	border: 1px solid rgba(255, 255, 255, 0.9);
+	color: #183a55;
+}
+
+.intro-brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.intro-brand h1 {
+	margin: 0;
+	font-size: 1.7rem;
+	line-height: 1;
+}
+
+.intro-brand p {
+	margin: 4px 0 0;
+	font-size: 0.85rem;
+	color: #355775;
+}
+
+.intro-steps {
+	display: grid;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.intro-steps p {
+	margin: 0;
+	padding: 10px;
+	border-radius: 12px;
+	background: rgba(14, 126, 196, 0.1);
+	border: 1px solid rgba(14, 126, 196, 0.18);
+	font-size: 0.95rem;
+	line-height: 1.3;
+}
+
+.play-btn {
+	width: 100%;
+	height: 46px;
+	border: 0;
+	border-radius: 12px;
+	font-size: 1.05rem;
+	font-weight: 800;
+	color: #12324a;
+	background: linear-gradient(140deg, #ffcd6b, #ffa94c);
+}
+
+@media (max-width: 420px) {
+	.app-shell {
+		width: 100vw;
+		height: 100dvh;
+		border-radius: 0;
+		padding: 6px;
+	}
+
+	.brand-left h2 {
+		font-size: 1.08rem;
+	}
+
+	.hud-box strong {
+		font-size: 1.08rem;
+	}
+
+	.lane-btn {
+		height: 52px;
+	}
+}

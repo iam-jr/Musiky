@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+	<meta name="theme-color" content="#0e7ec4" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="apple-mobile-web-app-title" content="Musiky" />
+	<meta name="application-name" content="Musiky" />
+	<meta name="msapplication-TileColor" content="#0e7ec4" />
+	<title>Musiky</title>
+	<link rel="manifest" href="manifest.webmanifest" />
+	<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" sizes="any" />
+	<link rel="shortcut icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+	<link rel="icon" href="assets/icons/icon-192.svg" type="image/svg+xml" sizes="192x192" />
+	<link rel="apple-touch-icon" href="assets/icons/icon-192.svg" />
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+	<div id="introModal" class="intro-modal open" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+		<div class="intro-card">
+			<header class="intro-brand">
+				<div class="logo-chip" aria-hidden="true">
+					<svg viewBox="0 0 64 64" role="img">
+						<defs>
+							<linearGradient id="modalGrad" x1="0" y1="0" x2="1" y2="1">
+								<stop offset="0" stop-color="#17a2f8" />
+								<stop offset="1" stop-color="#ff894d" />
+							</linearGradient>
+						</defs>
+						<circle cx="32" cy="32" r="30" fill="url(#modalGrad)" />
+						<path d="M28 18h7v20.8a8 8 0 1 1-7-7.95V18zm11 0h7v13.5a7 7 0 1 1-7-6.93V18z" fill="#ffffff" />
+					</svg>
+				</div>
+				<div>
+					<h1 id="introTitle">Musiky</h1>
+					<p>Nuevo modo Pulse Rush</p>
+				</div>
+			</header>
+
+			<div class="intro-steps" aria-label="Instrucciones">
+				<p><strong>1.</strong> Toca D F J K cuando el diamante llegue a la linea.</p>
+				<p><strong>2.</strong> Sube combo con precision para multiplicar score.</p>
+				<p><strong>3.</strong> Usa BOOST solo cuando haga falta.</p>
+			</div>
+
+			<button id="playBtn" class="play-btn">Play</button>
+		</div>
+	</div>
+
+	<main class="app-shell" aria-label="Juego Musiky">
+		<header class="brand-bar">
+			<div class="brand-left">
+				<div class="logo-chip" aria-hidden="true">
+					<svg viewBox="0 0 64 64" role="img">
+						<defs>
+							<linearGradient id="hudGrad" x1="0" y1="0" x2="1" y2="1">
+								<stop offset="0" stop-color="#17a2f8" />
+								<stop offset="1" stop-color="#ff894d" />
+							</linearGradient>
+						</defs>
+						<circle cx="32" cy="32" r="30" fill="url(#hudGrad)" />
+						<path d="M28 18h7v20.8a8 8 0 1 1-7-7.95V18zm11 0h7v13.5a7 7 0 1 1-7-6.93V18z" fill="#ffffff" />
+					</svg>
+				</div>
+				<div>
+					<h2>Musiky</h2>
+					<p>Pulse Rush</p>
+				</div>
+			</div>
+			<strong id="timeLeft" class="time-left">75s</strong>
+		</header>
+
+		<section class="hud-row" role="status" aria-live="polite">
+			<article class="hud-box">
+				<span>Score</span>
+				<strong id="score">0</strong>
+			</article>
+			<article class="hud-box">
+				<span>Combo</span>
+				<strong id="combo">0x</strong>
+			</article>
+			<article class="hud-box">
+				<span>Precision</span>
+				<strong id="accuracy">100%</strong>
+			</article>
+		</section>
+
+		<section class="stage-wrap">
+			<canvas id="gameCanvas" width="390" height="640" aria-label="Zona principal"></canvas>
+
+			<div id="endOverlay" class="overlay">
+				<div class="result-card">
+					<h3>Fin de partida</h3>
+					<p id="resultText">Resumen</p>
+					<button id="retryBtn" class="play-btn">Volver a jugar</button>
+				</div>
+			</div>
+		</section>
+
+		<section class="control-row" aria-label="Controles">
+			<button class="lane-btn lane-0" data-lane="0">D</button>
+			<button class="lane-btn lane-1" data-lane="1">F</button>
+			<button class="lane-btn lane-2" data-lane="2">J</button>
+			<button class="lane-btn lane-3" data-lane="3">K</button>
+		</section>
+
+		<section class="status-row" aria-label="Estado del juego">
+			<div class="meter-block">
+				<span>Energia</span>
+				<div class="meter-track"><div id="energyFill" class="meter-fill energy"></div></div>
+			</div>
+			<div class="meter-block">
+				<span>Heat</span>
+				<div class="meter-track"><div id="heatFill" class="meter-fill heat"></div></div>
+			</div>
+			<button id="boostBtn" class="boost-btn">BOOST x2</button>
+		</section>
+	</main>
+
+	<script src="js/script.js"></script>
+</body>
+</html>
